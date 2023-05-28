@@ -18,25 +18,25 @@ import java.time.LocalDateTime;
 
 class ProblemSolvePage extends PageBase
 {
-	private By sortBy = By.xpath("//div[@class='datatable']//table[@class='problems']//a[contains(@href, 'BY_SOLVED_DESC')]");
-	private By searchBy = By.xpath("//div[@class='datatable']//div[contains(text(), 'Problems')]//img");
-	private By searchFieldBy = By.xpath("//div[@class='datatable']//div[contains(text(), 'Problems')]//input");
-	private By problemIdBy = By.xpath("//div[@class='datatable']//table[@class='problems']//a[contains(text(), 'Watermelon')]");
-	private By problemNameBy = By.xpath("//div[@class='problem-statement']//div[@class='title']");
-	
-	private By addFileBy = By.xpath("//div[@id='sidebar']//div[contains(text(), 'Submit')]/ancestor::div[position() = 1]//form[@class='submitForm']//input[@name='sourceFile']");
-	
-	public ProblemSolvePage(WebDriver driver)
+    private By sortBy = By.xpath("//div[@class='datatable']//table[@class='problems']//a[contains(@href, 'BY_SOLVED_DESC')]");
+    private By searchBy = By.xpath("//div[@class='datatable']//div[contains(text(), 'Problems')]//img");
+    private By searchFieldBy = By.xpath("//div[@class='datatable']//div[contains(text(), 'Problems')]//input");
+    private By problemIdBy = By.xpath("//div[@class='datatable']//table[@class='problems']//a[contains(text(), 'Watermelon')]");
+    private By problemNameBy = By.xpath("//div[@class='problem-statement']//div[@class='title']");
+    
+    private By addFileBy = By.xpath("//div[@id='sidebar']//div[contains(text(), 'Submit')]/ancestor::div[position() = 1]//form[@class='submitForm']//input[@name='sourceFile']");
+    
+    public ProblemSolvePage(WebDriver driver)
     {
         super(driver);
     }
     
     public void openWatermelonProblem()
     {
-		WebElement sort = waitAndReturnElement(sortBy);
+        WebElement sort = waitAndReturnElement(sortBy);
         sort.click();
         
-		WebElement search = waitAndReturnElement(searchBy);
+        WebElement search = waitAndReturnElement(searchBy);
         search.click();
         
         WebElement searchField = waitAndReturnElement(searchFieldBy);
@@ -45,59 +45,59 @@ class ProblemSolvePage extends PageBase
         
         WebElement problemLink = waitAndReturnElement(problemIdBy);
         problemLink.click();
-	}
-	
-	public String getProblemName()
-	{
-		return waitAndReturnElement(problemNameBy).getText();
-	}
-	
-	public void uploadFile()
-	{
-		prepareUploadedFile();
-		
-		WebElement addFile = waitAndReturnElement(addFileBy);
-		
-		//String filePath = "/home/gaben/Dokumentumok/sqt/selenium-docker-sandbox/tests/resource/program.cpp";
-		String filePath = "/home/selenium/tests/resource/program.cpp";
-		//~ JavascriptExecutor jsx = (JavascriptExecutor) driver;
-		//~ jsx.executeScript("document.getElementsByName('sourceFile').value='" + filePath + "';");
-		
-		addFile.sendKeys(filePath);
-	}
-	
-	private void prepareUploadedFile()
-	{
-		String code = "";
-		String line = "";
-		BufferedReader reader;
-		try
-		{
-			String filenamew = "resource/program.cpp";
-			FileWriter fw = new FileWriter(filenamew, false);
-			
-			String filenamer = "resource/programbase.cpp";
-			FileReader fr = new FileReader(filenamer);
-			reader = new BufferedReader(fr);
-			
-			line = reader.readLine();
-			
-			while (line != null)
-			{
-				fw.write(line + "\n");
-				line = reader.readLine();
-			}
-			
-			line = "//" + java.time.LocalDateTime.now().toString();
-			
-			fw.write(line);
-			
-			fr.close();
-			fw.close();
-		}
-		catch (IOException e)
-		{
-			System.out.println("Error occured when file was uploaded");
-		}
-	}
+    }
+    
+    public String getProblemName()
+    {
+        return waitAndReturnElement(problemNameBy).getText();
+    }
+    
+    public void uploadFile()
+    {
+        prepareUploadedFile();
+        
+        WebElement addFile = waitAndReturnElement(addFileBy);
+        
+        //String filePath = "/home/gaben/Dokumentumok/sqt/selenium-docker-sandbox/tests/resource/program.cpp";
+        String filePath = System.getProperty("user.dir") + "/resource/program.cpp";
+        //~ JavascriptExecutor jsx = (JavascriptExecutor) driver;
+        //~ jsx.executeScript("document.getElementsByName('sourceFile').value='" + filePath + "';");
+        
+        addFile.sendKeys(filePath);
+    }
+    
+    private void prepareUploadedFile()
+    {
+        String code = "";
+        String line = "";
+        BufferedReader reader;
+        try
+        {
+            String filenamew = "resource/program.cpp";
+            FileWriter fw = new FileWriter(filenamew, false);
+            
+            String filenamer = "resource/programbase.cpp";
+            FileReader fr = new FileReader(filenamer);
+            reader = new BufferedReader(fr);
+            
+            line = reader.readLine();
+            
+            while (line != null)
+            {
+                fw.write(line + "\n");
+                line = reader.readLine();
+            }
+            
+            line = "//" + java.time.LocalDateTime.now().toString();
+            
+            fw.write(line);
+            
+            fr.close();
+            fw.close();
+        }
+        catch (IOException e)
+        {
+            System.out.println("Error occured when file was uploaded");
+        }
+    }
 }

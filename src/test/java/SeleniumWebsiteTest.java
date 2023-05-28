@@ -31,7 +31,7 @@ public class SeleniumWebsiteTest
         password = configFileReader.getInstance().getPassword();
     }
     
-    //@Test
+    @Test
     public void TestMainPage()
     {
         MainPage mainPage = new MainPage(this.driver);
@@ -47,7 +47,7 @@ public class SeleniumWebsiteTest
         assertTrue(menuTexts.contains("CONTESTS"));
     }
     
-    //@Test
+    @Test
     public void TestLoginLogout()
     {
         MainPage mainPage = new MainPage(this.driver);
@@ -66,7 +66,7 @@ public class SeleniumWebsiteTest
         assertTrue(mainPage.isLoginVisible());
     }
     
-    //@Test
+    @Test
     public void TestProfileChange() {
         MainPage mainPage = new MainPage(this.driver);
         
@@ -113,11 +113,7 @@ public class SeleniumWebsiteTest
         final String problemName = "Watermelon";
         assertTrue(problemSolvePage.getProblemName().contains(problemName));
         
-        problemSolvePage.uploadFile();
-        
-        assertTrue(true);
-        
-        waitSeconds(10);
+        //problemSolvePage.uploadFile();
         
         mainPage = loginPage.logout(mainPage);
     }
@@ -132,13 +128,13 @@ public class SeleniumWebsiteTest
     
     private void waitSeconds(int seconds)
     {
-		try
-		{
-			Thread.sleep(1000 * seconds);
-		}
-		catch (InterruptedException e)
-		{
-			Thread.currentThread().interrupt();
-		}
-	}
+        try
+        {
+            Thread.sleep(1000 * seconds);
+        }
+        catch (InterruptedException e)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
 }

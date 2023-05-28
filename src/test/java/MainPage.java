@@ -54,13 +54,13 @@ class MainPage extends PageBase
         List<String> menuListStrings = new ArrayList<String>();
         
         menuListElements.forEach( (elem) -> menuListStrings.add(elem.getText()) );
-		
-		return menuListStrings;
-	}
-	
-	public boolean isLoginVisible()
-	{
-		WebElement lb = waitAndReturnElement(langChooserBy);
-		return lb.getText().contains("Enter");
-	}
+        
+        return menuListStrings;
+    }
+    
+    public boolean isLoginVisible()
+    {
+        WebElement lb = waitAndReturnElement(langChooserBy);
+        return lb.getText().contains("Enter");
+    }
 }

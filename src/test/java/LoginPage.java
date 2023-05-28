@@ -32,23 +32,23 @@ class LoginPage extends PageBase
     
     public String getUsername()
     {
-		WebElement profileButton = waitAndReturnElement(profileButtonBy);
-		return profileButton.getText();
-	}
+        WebElement profileButton = waitAndReturnElement(profileButtonBy);
+        return profileButton.getText();
+    }
     
     public ProfilePage openProfile()
     {
-		WebElement profileButton = waitAndReturnElement(profileButtonBy);
+        WebElement profileButton = waitAndReturnElement(profileButtonBy);
         profileButton.click();
         
         return new ProfilePage(this.driver);
-	}
-	
-	public ProblemSolvePage openProblemSet()
-	{
-		WebElement problemSetButton = waitAndReturnElement(problemSetBy);
+    }
+    
+    public ProblemSolvePage openProblemSet()
+    {
+        WebElement problemSetButton = waitAndReturnElement(problemSetBy);
         problemSetButton.click();
         
         return new ProblemSolvePage(driver);
-	}
+    }
 }
