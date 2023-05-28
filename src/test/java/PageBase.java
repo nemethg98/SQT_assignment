@@ -19,7 +19,7 @@ class PageBase {
     
     public PageBase(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, 20);
+        this.wait = new WebDriverWait(driver, 15);
     }
     
     protected WebElement waitAndReturnElement(By locator) {
@@ -31,14 +31,4 @@ class PageBase {
         this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
         return this.driver.findElements(locator);
     }
-    
-    public String getBodyText() {
-        WebElement bodyElement = this.waitAndReturnElement(By.tagName("body"));
-        return bodyElement.getText();
-    }
-    
-    //~ public String getTitle() {
-		//~ WebElement titleElement = this.waitAndReturnElement(By.tagName("head"));
-        //~ return titleElement.getText();
-	//~ }
 }

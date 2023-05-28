@@ -24,6 +24,8 @@ class ProblemSolvePage extends PageBase
 	private By problemIdBy = By.xpath("//div[@class='datatable']//table[@class='problems']//a[contains(text(), 'Watermelon')]");
 	private By problemNameBy = By.xpath("//div[@class='problem-statement']//div[@class='title']");
 	
+	private By addFileBy = By.xpath("//div[@id='sidebar']//div[contains(text(), 'Submit')]/ancestor::div[position() = 1]//form[@class='submitForm']//input[@name='sourceFile']");
+	
 	public ProblemSolvePage(WebDriver driver)
     {
         super(driver);
@@ -53,21 +55,44 @@ class ProblemSolvePage extends PageBase
 	public void uploadFile()
 	{
 		prepareUploadedFile();
+		
+		WebElement addFile = waitAndReturnElement(addFileBy);
+		
+		//String filePath = "/home/gaben/Dokumentumok/sqt/selenium-docker-sandbox/tests/resource/program.cpp";
+		String filePath = "/home/selenium/tests/resource/program.cpp";
+		//~ JavascriptExecutor jsx = (JavascriptExecutor) driver;
+		//~ jsx.executeScript("document.getElementsByName('sourceFile').value='" + filePath + "';");
+		
+		addFile.sendKeys(filePath);
 	}
 	
 	private void prepareUploadedFile()
 	{
 		String code = "";
 		String line = "";
+		BufferedReader reader;
 		try
 		{
 			String filenamew = "resource/program.cpp";
 			FileWriter fw = new FileWriter(filenamew, false);
 			
-			line = "//" + java.time.LocalTime.now().toString();
+			String filenamer = "resource/programbase.cpp";
+			FileReader fr = new FileReader(filenamer);
+			reader = new BufferedReader(fr);
+			
+			line = reader.readLine();
+			
+			while (line != null)
+			{
+				fw.write(line + "\n");
+				line = reader.readLine();
+			}
+			
+			line = "//" + java.time.LocalDateTime.now().toString();
 			
 			fw.write(line);
 			
+			fr.close();
 			fw.close();
 		}
 		catch (IOException e)

@@ -23,7 +23,8 @@ class MainPage extends PageBase
     private By loginButtonBy = By.xpath("//form[@id='enterForm']//input[@class='submit']");
     private By lbBy = By.xpath("//div[@id='header']//div[@class='lang-chooser']//a[contains(@href, 'enter')]");
     private By langChooserBy = By.xpath("//div[@id='header']//div[@class='lang-chooser']");
-    
+    private By menuListBy = By.xpath("//div[@class='menu-list-container']//li");
+        
     public MainPage(WebDriver driver)
     {
         super(driver);
@@ -46,9 +47,8 @@ class MainPage extends PageBase
         return new LoginPage(this.driver);
     }
     
-    public List<String> getH2Strings()
+    public List<String> getMenuListStrings()
     {
-        By menuListBy = By.xpath("//div[@class='menu-list-container']//li");
         List<WebElement> menuListElements = waitAndReturnElements(menuListBy);
         
         List<String> menuListStrings = new ArrayList<String>();

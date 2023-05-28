@@ -36,16 +36,15 @@ public class SeleniumWebsiteTest
     {
         MainPage mainPage = new MainPage(this.driver);
         
-        //TODO: static page test
         final String expectedPageTitle = "Codeforces";
         String pageTitle = driver.getTitle();
         assertTrue(pageTitle.contains(expectedPageTitle));
         
-        List<String> h2Texts = mainPage.getH2Strings();
-        assertTrue(h2Texts.contains("HOME"));
-        assertTrue(h2Texts.contains("TOP"));
-        assertTrue(h2Texts.contains("CATALOG"));
-        assertTrue(h2Texts.contains("CONTESTS"));
+        List<String> menuTexts = mainPage.getMenuListStrings();
+        assertTrue(menuTexts.contains("HOME"));
+        assertTrue(menuTexts.contains("TOP"));
+        assertTrue(menuTexts.contains("CATALOG"));
+        assertTrue(menuTexts.contains("CONTESTS"));
     }
     
     //@Test
@@ -105,6 +104,8 @@ public class SeleniumWebsiteTest
         
         LoginPage loginPage = mainPage.login(username, password);
         
+        waitSeconds(2);
+        
         ProblemSolvePage problemSolvePage = loginPage.openProblemSet();
         
         problemSolvePage.openWatermelonProblem();
@@ -116,7 +117,7 @@ public class SeleniumWebsiteTest
         
         assertTrue(true);
         
-        //TODO: upload solution, check it
+        waitSeconds(10);
         
         mainPage = loginPage.logout(mainPage);
     }
